@@ -1,7 +1,7 @@
 const recipeCards = document.querySelector('#card-container');
 const filter = document.querySelector('#selector');
 
-filter.addEventListener('change', filterRecipes)
+filter.addEventListener('change', filterRecipes);
 
 fetch("http://localhost:3000/recipes")
 .then(res => res.json())
@@ -43,21 +43,18 @@ function renderRecipe(recipe) {
 }
 
 function filterRecipes(e) {
-    // console.log(e.target.value);
-    // filter through recipe.ingredients on each recipe
-    let recipeArray = [];
     fetch("http://localhost:3000/recipes")
     .then(res => res.json())
-    .then(data => {
+    .then(filterFunction)
+
+    function filterFunction(data) {
+        filteredArray = [];
         data.forEach(recipe => {
-            recipeArray.push(recipe.ingredients.filter(ingred => ingred === e.target.value))
-            // console.log(recipeArray);
+            if(recipe.ingredients.indexOf(e.target.value)>=0) {
+                // console.log(recipe.id)
+                filteredArray.push(recipe.id);
+            }
         })
-        recipeArray.forEach(recipe => {
-            if (recipe.length > 0) {
-                return 
-            } 
-        })
-    });
-    // return id
+        console.log(filteredArray)
+    }
 }
