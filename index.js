@@ -3,9 +3,16 @@ const filter = document.querySelector('#selector');
 
 filter.addEventListener('change', filterRecipes);
 
-fetch("http://localhost:3000/recipes")
-.then(res => res.json())
-.then(renderRecipes);
+recipeCards.addEventListener('click', addLike);
+
+fetchRecipes()
+
+function fetchRecipes(){
+    
+    return fetch("http://localhost:3000/recipes")
+    .then(res => res.json())
+    .then(renderRecipes);
+}
 
 function renderRecipes(recipesObj) {
     // console.log(recipesObj);
@@ -23,12 +30,14 @@ function renderRecipe(recipe) {
     let likeBtn = document.createElement('button');
     let likes = document.createElement('p');
 
-    recipeDiv.className = "cards"
+    recipeDiv.className = "cards";
     title.textContent = recipe.name;
     image.src = recipe.image;
     link.href = recipe["recipe-url"];
     link.textContent = "Click here for recipe!"
     likeBtn.textContent = " YUM ";
+    likeBtn.dataset.id = recipe.id
+    likeBtn.dataset.likes = recipe.hearts
     likes.textContent = `${recipe.hearts} likes`;
 
     likeDiv.append(likes, likeBtn);
@@ -55,6 +64,37 @@ function filterRecipes(e) {
                 filteredArray.push(recipe.id);
             }
         })
-        console.log(filteredArray)
+        filterFetch(filteredArray)
+    }
+}
+function filterFetch(array){
+    recipeCards.textContent = ""
+    for (index in array){
+        fetch(`http://localhost:3000/recipes/${array[index]}`)
+        .then(resp => resp.json())
+        .then(data => renderRecipe(data))
+    }
+}
+function addLike(e){
+    //console.log(e.target)
+    if (e.target.textContent === " YUM "){
+        e.target.dataset.likes = parseInt(e.target.dataset.likes) + 1
+        let newHearts = {hearts: (e.target.dataset.likes)}
+        //console.log(newHearts)
+        fetch(`http://localhost:3000/recipes/${e.target.dataset.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newHearts)
+        })
+        .then(resp => resp.json())
+        .then((data) => {
+            //recipeCards.textContent = ""
+            e.target.previousSibling.textContent = `${data.hearts} likes`
+            //renderRecipe(data)
+            //fetchRecipes()
+
+        })
     }
 }
