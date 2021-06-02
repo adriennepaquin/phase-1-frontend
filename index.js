@@ -2,10 +2,17 @@ const recipeCards = document.querySelector('#card-container');
 const filter = document.querySelector('#selector');
 const addIngredBtn = document.querySelector('#addIngredBtn');
 const ingredForm = document.querySelector('#ingredientForm');
+const recipeForm = document.querySelector('#add-form')
+const allBtn = document.querySelector('#showAll')
 
 filter.addEventListener('change', filterRecipes);
 recipeCards.addEventListener('click', addLike);
 addIngredBtn.addEventListener('click', addInput);
+recipeForm.addEventListener('submit', addRecipe);
+allBtn.addEventListener('click', () => {
+    recipeCards.textContent = "";
+    fetchRecipes()
+})
 
 fetchRecipes()
 
@@ -99,4 +106,29 @@ function addInput(e) {
     newInput.className = "ingredients";
     newInput.name = "ingredients";
     ingredForm.append(newInput);
+}
+
+function addRecipe(e) {
+    e.preventDefault()
+    //console.log(e.target.ingredients[0].value)
+    let newIngre = []
+    e.target.ingredients.forEach(index => newIngre.push(index.value))
+    //console.log(newIngre)
+    let newRecipe = {
+        name: e.target.name.value,
+        image: e.target.image.value,
+        "recipe-url": e.target.recipeUrl.value,
+        hearts: 0,
+        ingredients: newIngre
+    }
+    //console.log(newRecipe)
+    fetch("http://localhost:3000/recipes", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRecipe)
+    })
+    .then(resp => resp.json())
+    .then(data => renderRecipe(data))
 }

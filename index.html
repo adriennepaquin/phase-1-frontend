@@ -15,7 +15,8 @@
     </header>
     <div class="sidebar">
         <div id = "selector">
-            <label for = "ingredient">What is in your kitchen?</label>
+            <h4>Filter Recipes</h4>
+            <label for = "ingredient">What is in your kitchen?</label><br>
             <select name = "ingredient" id = "ingredient">
                 <option value = "sugar">Sugar</option>
                 <option value = "butter">Butter</option>
@@ -34,9 +35,11 @@
                 <option value = "cocoa powder">Cocoa Powder</option>
                 <option value = "oil">Oil</option>
                 <option value = "lemon-juice">Lemon Juice</option>
-            </select>
+            </select><br>
+            <button id="showAll">Show All Recipes</button>
         </div>
         <div>
+            <h4>Add New Recipe</h4>
             <form id = "add-form">
                 <label for="name">Recipe name:</label><br>
                 <input type="text" id="name" name="name"><br>
@@ -46,6 +49,7 @@
                 <input type="text" id="recipeUrl" name="recipeUrl"><br>
                 <div id = "ingredientForm">
                     <label for="ingredients">Ingredients: (separate with spaces)</label><br>
+                    <input type="text" class="ingredients" name="ingredients"><br>
                     <input type="text" class="ingredients" name="ingredients"><br>
                 </div>
                 <input type="button" id="addIngredBtn" value="Add Another Ingredient"><br>
