@@ -1,16 +1,19 @@
 const recipeCards = document.querySelector('#card-container');
+const filter = document.querySelector('#selector');
+
+filter.addEventListener('change', filterRecipes)
 
 fetch("http://localhost:3000/recipes")
 .then(res => res.json())
 .then(renderRecipes);
 
 function renderRecipes(recipesObj) {
-    console.log(recipesObj);
+    // console.log(recipesObj);
     recipesObj.forEach(recipe => renderRecipe(recipe));
 }
 
 function renderRecipe(recipe) {
-    console.log(recipe["recipe-url"])
+    // console.log(recipe["recipe-url"])
     let recipeDiv = document.createElement('div');
     let title = document.createElement('h3');
     let image = document.createElement('img')
@@ -33,9 +36,28 @@ function renderRecipe(recipe) {
     recipeCards.append(recipeDiv);
 
     recipe.ingredients.forEach(ingredient => {
-        console.log(ingredient)
         let ingredLi = document.createElement('li');
         ingredLi.textContent = ingredient;
         ingredUl.append(ingredLi);
     })
+}
+
+function filterRecipes(e) {
+    // console.log(e.target.value);
+    // filter through recipe.ingredients on each recipe
+    let recipeArray = [];
+    fetch("http://localhost:3000/recipes")
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(recipe => {
+            recipeArray.push(recipe.ingredients.filter(ingred => ingred === e.target.value))
+            // console.log(recipeArray);
+        })
+        recipeArray.forEach(recipe => {
+            if (recipe.length > 0) {
+                return 
+            } 
+        })
+    });
+    // return id
 }
