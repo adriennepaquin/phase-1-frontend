@@ -16,12 +16,10 @@ function fetchRecipes(){
 }
 
 function renderRecipes(recipesObj) {
-    // console.log(recipesObj);
     recipesObj.forEach(recipe => renderRecipe(recipe));
 }
 
 function renderRecipe(recipe) {
-    // console.log(recipe["recipe-url"])
     let recipeDiv = document.createElement('div');
     let title = document.createElement('h3');
     let image = document.createElement('img')
@@ -61,7 +59,6 @@ function filterRecipes(e) {
         filteredArray = [];
         data.forEach(recipe => {
             if(recipe.ingredients.indexOf(e.target.value)>=0) {
-                // console.log(recipe.id)
                 filteredArray.push(recipe.id);
             }
         })
@@ -70,7 +67,7 @@ function filterRecipes(e) {
 }
 
 function filterFetch(array){
-    recipeCards.textContent = ""
+    recipeCards.textContent = "";
     for (index in array){
         fetch(`http://localhost:3000/recipes/${array[index]}`)
         .then(resp => resp.json())
@@ -79,11 +76,9 @@ function filterFetch(array){
 }
 
 function addLike(e){
-    //console.log(e.target)
     if (e.target.textContent === " YUM "){
-        e.target.dataset.likes = parseInt(e.target.dataset.likes) + 1
-        let newHearts = {hearts: (e.target.dataset.likes)}
-        //console.log(newHearts)
+        e.target.dataset.likes = parseInt(e.target.dataset.likes) + 1;
+        let newHearts = {hearts: (e.target.dataset.likes)};
         fetch(`http://localhost:3000/recipes/${e.target.dataset.id}`, {
             method: "PATCH",
             headers: {
@@ -92,7 +87,7 @@ function addLike(e){
             body: JSON.stringify(newHearts)
         })
         .then(resp => resp.json())
-        .then((data) => {
+        .then(data => {
             e.target.previousSibling.textContent = `${data.hearts} likes`
         })
     }
