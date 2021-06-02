@@ -20,6 +20,7 @@ function renderRecipe(recipe) {
     let likeBtn = document.createElement('button');
     let likes = document.createElement('p');
 
+    recipeDiv.className = "cards"
     title.textContent = recipe.name;
     image.src = recipe.image;
     link.href = recipe["recipe-url"];
@@ -28,6 +29,13 @@ function renderRecipe(recipe) {
     likes.textContent = `${recipe.hearts} likes`;
 
     likeDiv.append(likes, likeBtn);
-    recipeDiv.append(title, image, link, likeDiv);
+    recipeDiv.append(title, image, link, ingredUl, likeDiv);
     recipeCards.append(recipeDiv);
+
+    recipe.ingredients.forEach(ingredient => {
+        console.log(ingredient)
+        let ingredLi = document.createElement('li');
+        ingredLi.textContent = ingredient;
+        ingredUl.append(ingredLi);
+    })
 }

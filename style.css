@@ -1,0 +1,23 @@
+body {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+.header { grid-area: 1 / 1 / 2 / 6; }
+.sidebar { grid-area: 2 / 1 / 6 / 2; }
+#card-container {grid-area: 2 / 2 / 6 / 6;}
+.cards {
+    text-align: center;
+    border: grey solid 1px;
+    padding: 1rem;
+    width: 15rem;
+    height: 25rem;
+    display: inline-grid;
+    margin: 1rem 2rem;
+}
+img {
+    max-width: 50px;
+}
