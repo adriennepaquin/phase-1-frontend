@@ -1,14 +1,15 @@
 const recipeCards = document.querySelector('#card-container');
 const filter = document.querySelector('#selector');
+const addIngredBtn = document.querySelector('#addIngredBtn');
+const ingredForm = document.querySelector('#ingredientForm');
 
 filter.addEventListener('change', filterRecipes);
-
 recipeCards.addEventListener('click', addLike);
+addIngredBtn.addEventListener('click', addInput);
 
 fetchRecipes()
 
-function fetchRecipes(){
-    
+function fetchRecipes(){ 
     return fetch("http://localhost:3000/recipes")
     .then(res => res.json())
     .then(renderRecipes);
@@ -67,6 +68,7 @@ function filterRecipes(e) {
         filterFetch(filteredArray)
     }
 }
+
 function filterFetch(array){
     recipeCards.textContent = ""
     for (index in array){
@@ -75,6 +77,7 @@ function filterFetch(array){
         .then(data => renderRecipe(data))
     }
 }
+
 function addLike(e){
     //console.log(e.target)
     if (e.target.textContent === " YUM "){
@@ -90,11 +93,15 @@ function addLike(e){
         })
         .then(resp => resp.json())
         .then((data) => {
-            //recipeCards.textContent = ""
             e.target.previousSibling.textContent = `${data.hearts} likes`
-            //renderRecipe(data)
-            //fetchRecipes()
-
         })
     }
+}
+
+function addInput(e) {
+    let newInput = document.createElement('input');
+    newInput.type = "text";
+    newInput.className = "ingredients";
+    newInput.name = "ingredients";
+    ingredForm.append(newInput);
 }

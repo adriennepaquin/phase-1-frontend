@@ -36,6 +36,23 @@
                 <option value = "lemon-juice">Lemon Juice</option>
             </select>
         </div>
+        <div>
+            <form id = "add-form">
+                <label for="name">Recipe name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="image">Image URL:</label><br>
+                <input type="text" id="image" name="image"><br>
+                <label for="recipeUrl">Recipe URL:</label><br>
+                <input type="text" id="recipeUrl" name="recipeUrl"><br>
+                <div id = "ingredientForm">
+                    <label for="ingredients">Ingredients: (separate with spaces)</label><br>
+                    <input type="text" class="ingredients" name="ingredients"><br>
+                </div>
+                <input type="button" id="addIngredBtn" value="Add Another Ingredient"><br>
+                <input type="submit" value="Submit New Recipe">
+            </form>
+
+        </div>
     </div>
     <div id = "card-container">
 
