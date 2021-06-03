@@ -50,7 +50,9 @@ function renderRecipe(recipe) {
     likeBtn.textContent = " YUM ";
     likeBtn.dataset.id = recipe.id
     likeBtn.dataset.likes = recipe.hearts
+    likeBtn.className = "likebutton"
     likes.textContent = `${recipe.hearts} likes`;
+    ingredUl.className = "scrollingred"
 
     likeDiv.append(likes, likeBtn);
     recipeDiv.append(title, image, link, ingredUl, likeDiv);

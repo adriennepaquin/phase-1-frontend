@@ -1,23 +1,120 @@
+h1 {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 4em;
+    margin: auto;
+}
+
+h2 {
+    font-family: 'Mate SC', serif;
+    font-size: 1.5em;
+    margin: auto;
+}
 body {
+    font-family: 'Mate', serif;
+}
+
+.nonheader {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     }
     
-.header { grid-area: 1 / 1 / 2 / 6; }
-.sidebar { grid-area: 2 / 1 / 6 / 2; }
-#card-container {grid-area: 2 / 2 / 6 / 6;}
+.header {
+    background-color: rgba(127, 255, 212, 0.616);
+    display: block;
+    padding: 3em;
+}
+.sidebar { 
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: rgba(211, 211, 211, 0.671);
+    padding-left: 1.5em;
+}
+select {
+    width: 88%;
+}
+button {
+    font-family: 'Mate SC', serif;
+    width: 88%;
+}
+input {
+    margin-bottom: .5em;
+    width: 88%;
+    font-family: 'Mate SC', serif;
+}
+input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+}
+#card-container {grid-area: 1 / 2 / 2 / 6;}
 .cards {
     text-align: center;
-    border: grey solid 1px;
     padding: 1rem;
     width: 15rem;
     height: 25rem;
     display: inline-grid;
     margin: 1rem 2rem;
+    background-color: rgba(127, 255, 212, 0.1);
+    border-radius: 15px;
+    border: 2px solid lightslategrey;
+    /* overflow-y: auto; */
+}
+.scrollingred {
+    overflow-y: auto;
+    text-align: left;
+    margin: 5px;
+}
+.scrollingred::-webkit-scrollbar {
+    width:20px;
+}
+.scrollingred::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+.cards:hover {
+    box-shadow: 10px 10px 5px rgba(128, 128, 128, 0.493);
+}
+h3 {
+    font-family: 'Mate SC', serif;
+    font-size: 1.25em;
 }
 img {
-    max-width: 50px;
+    /* width: 100%; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 150px;
+}
+a {
+    margin: 6px;
+    font-family: 'Mate', serif;
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    font-weight: bold;
+}
+p {
+    margin: 6px;
+    font-weight: bold;
+}
+.likebutton {
+    width: 25%;
+    background-color: aquamarine;
+    border: none;
+    border-radius: 7px;
+    padding: 8px;
+    font-weight: bold;
+}
+.likebutton:hover {
+    box-shadow: 5px 5px 3px rgba(128, 128, 128, 0.493);
+}
+footer {
+    background-color: rgba(127, 255, 212, 0.616);
+    display: block;
+    padding: 1em;
+    text-align: center;
 }

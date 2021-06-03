@@ -6,44 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="./index.js"></script>
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mate&family=Mate+SC&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <title>Recipe Reconnaissance</title>
 </head>
 <body>
     <header class="header">
-        <h1>Recipes</h1>
-        <h2>Which of these 5 recipes do you want??</h2>
+        <h1>Recipe Reconnaissance</h1>
+        <h2>Uncomplicated recipes for a complicated world.</h2>
     </header>
-    <div class="sidebar">
-        <div id = "selector">
-            <h4>Filter Recipes</h4>
-            <label for = "ingredient">What is in your kitchen?</label><br>
-            <select name = "ingredient" id = "ingredient">
-                
-            </select><br>
-            <button id="showAll">Show All Recipes</button>
+    <div class = "nonheader">
+        <div class="sidebar">
+            <div id = "selector">
+                <h4>Filter Recipes</h4>
+                <label for = "ingredient">What is in your kitchen?</label><br>
+                <select name = "ingredient" id = "ingredient">
+                    
+                </select><br><br>
+                <button id="showAll">Show All Recipes</button>
+            </div>
+            <div>
+                <h4>Add New Recipe</h4>
+                <form id = "add-form">
+                    <label for="name">Recipe name:</label><br>
+                    <input type="text" id="name" name="name"><br>
+                    <label for="image">Image URL:</label><br>
+                    <input type="text" id="image" name="image"><br>
+                    <label for="recipeUrl">Recipe URL:</label><br>
+                    <input type="text" id="recipeUrl" name="recipeUrl"><br>
+                    <div id = "ingredientForm">
+                        <label for="ingredients">Ingredients:</label><br>
+                        <input type="text" class="ingredients" name="ingredients"><br>
+                        <input type="text" class="ingredients" name="ingredients"><br>
+                    </div>
+                    <input type="button" id="addIngredBtn" value="Add Another Ingredient"><br>
+                    <input type="submit" value="Submit New Recipe">
+                </form>
+
+            </div>
         </div>
-        <div>
-            <h4>Add New Recipe</h4>
-            <form id = "add-form">
-                <label for="name">Recipe name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="image">Image URL:</label><br>
-                <input type="text" id="image" name="image"><br>
-                <label for="recipeUrl">Recipe URL:</label><br>
-                <input type="text" id="recipeUrl" name="recipeUrl"><br>
-                <div id = "ingredientForm">
-                    <label for="ingredients">Ingredients: (separate with spaces)</label><br>
-                    <input type="text" class="ingredients" name="ingredients"><br>
-                    <input type="text" class="ingredients" name="ingredients"><br>
-                </div>
-                <input type="button" id="addIngredBtn" value="Add Another Ingredient"><br>
-                <input type="submit" value="Submit New Recipe">
-            </form>
+        <div id = "card-container">
 
         </div>
     </div>
-    <div id = "card-container">
-
-    </div>
+    <footer>
+        <h3>Phase 1 Project by Nisa & Adrienne</h3>
+    </footer>
 </body>
 </html>
