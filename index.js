@@ -2,8 +2,11 @@ const recipeCards = document.querySelector('#card-container');
 const filter = document.querySelector('#selector');
 const addIngredBtn = document.querySelector('#addIngredBtn');
 const ingredForm = document.querySelector('#ingredientForm');
-const recipeForm = document.querySelector('#add-form')
-const allBtn = document.querySelector('#showAll')
+const recipeForm = document.querySelector('#add-form');
+const allBtn = document.querySelector('#showAll');
+const ingredDropdown = document.querySelector('#ingredient');
+const ingredientsArray = [];
+
 
 filter.addEventListener('change', filterRecipes);
 recipeCards.addEventListener('click', addLike);
@@ -12,14 +15,17 @@ recipeForm.addEventListener('submit', addRecipe);
 allBtn.addEventListener('click', () => {
     recipeCards.textContent = "";
     fetchRecipes()
-})
+});
 
 fetchRecipes()
 
 function fetchRecipes(){ 
     return fetch("http://localhost:3000/recipes")
     .then(res => res.json())
-    .then(renderRecipes);
+    .then((data) => {
+        renderRecipes(data);
+        renderDropdown();
+    });
 }
 
 function renderRecipes(recipesObj) {
@@ -51,6 +57,8 @@ function renderRecipe(recipe) {
     recipeCards.append(recipeDiv);
 
     recipe.ingredients.forEach(ingredient => {
+        ingredientsArray.push(ingredient.toLowerCase());
+
         let ingredLi = document.createElement('li');
         ingredLi.textContent = ingredient;
         ingredUl.append(ingredLi);
@@ -110,10 +118,8 @@ function addInput(e) {
 
 function addRecipe(e) {
     e.preventDefault()
-    //console.log(e.target.ingredients[0].value)
     let newIngre = []
     e.target.ingredients.forEach(index => newIngre.push(index.value))
-    //console.log(newIngre)
     let newRecipe = {
         name: e.target.name.value,
         image: e.target.image.value,
@@ -121,7 +127,6 @@ function addRecipe(e) {
         hearts: 0,
         ingredients: newIngre
     }
-    //console.log(newRecipe)
     fetch("http://localhost:3000/recipes", {
         method: "POST",
         headers: {
@@ -130,5 +135,26 @@ function addRecipe(e) {
         body: JSON.stringify(newRecipe)
     })
     .then(resp => resp.json())
-    .then(data => renderRecipe(data))
+    .then(data => {
+        renderRecipe(data);
+        renderDropdown();
+    })
+}
+
+function renderDropdown() {
+    ingredDropdown.innerHTML = "";
+    let blank = document.createElement('option');
+    blank.setAttribute('selected', 'selected');
+    blank.setAttribute('disabled', 'disabled');
+    blank.setAttribute('hidden', 'hidden');
+    ingredDropdown.append(blank);
+
+    let uniqueIngredients = [...new Set(ingredientsArray)];
+    uniqueIngredients = uniqueIngredients.sort();
+    uniqueIngredients.forEach(ingred => {
+        let newIngred = document.createElement('option');
+        newIngred.value = ingred;
+        newIngred.textContent = ingred;
+        ingredDropdown.append(newIngred);
+    })
 }
