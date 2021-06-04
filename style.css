@@ -13,6 +13,11 @@ body {
     font-family: 'Mate', serif;
 }
 
+h4 {
+    text-decoration: underline;
+    font-size: large;
+}
+
 .nonheader {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

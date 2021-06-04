@@ -168,6 +168,7 @@ function addRecipe(e) {
     .then(data => {
         renderRecipe(data);
         renderDropdown();
+        recipeForm.reset();
     })
 }
 
