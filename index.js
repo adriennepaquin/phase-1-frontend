@@ -40,7 +40,8 @@ function renderRecipe(recipe) {
     let link = document.createElement('a');
     let likeDiv = document.createElement('div');
     let likeBtn = document.createElement('button');
-    // let ewBtn = document.createElement('button');
+
+    let ewBtn = document.createElement('button');
     let likes = document.createElement('p');
 
     recipeDiv.className = "cards";
@@ -52,14 +53,16 @@ function renderRecipe(recipe) {
     likeBtn.dataset.id = recipe.id
     likeBtn.dataset.likes = recipe.hearts
     likeBtn.className = "likebutton"
-    // ewBtn.textContent = " EW ";
-    // ewBtn.dataset.id = recipe.id;
-    // ewBtn.dataset.likes = recipe.hearts;
-    // ewBtn.className = "ewbutton"
+
+    ewBtn.textContent = " EW ";
+    ewBtn.dataset.id = recipe.id;
+    ewBtn.dataset.likes = recipe.hearts;
+    ewBtn.className = "ewbutton"
+
     likes.textContent = `${recipe.hearts} likes`;
     ingredUl.className = "scrollingred"
 
-    likeDiv.append(likes, likeBtn);
+    likeDiv.append(likes, likeBtn, ewBtn);
     recipeDiv.append(title, image, link, ingredUl, likeDiv);
     recipeCards.append(recipeDiv);
 
@@ -99,7 +102,10 @@ function filterFetch(array){
 
 function addLike(e){
     if (e.target.textContent === " YUM "){
-        e.target.dataset.likes = parseInt(e.target.dataset.likes) + 1;
+        console.log(e.target.nextSibling)
+        newLikes = parseInt(e.target.dataset.likes) + 1;
+        e.target.dataset.likes = newLikes;
+        e.target.nextSibling.dataset.likes = newLikes;
         let newHearts = {hearts: (e.target.dataset.likes)};
         fetch(`http://localhost:3000/recipes/${e.target.dataset.id}`, {
             method: "PATCH",
@@ -112,20 +118,23 @@ function addLike(e){
         .then(data => {
             e.target.previousSibling.textContent = `${data.hearts} likes`
         })
-    // } else if (e.target.textContent === " EW "){
-    //     e.target.dataset.likes = parseInt(e.target.dataset.likes) - 1;
-    //     let newHearts = {hearts: (e.target.dataset.likes)};
-    //     fetch(`http://localhost:3000/recipes/${e.target.dataset.id}`, {
-    //         method: "PATCH",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(newHearts)
-    //     })
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         e.target.previousSibling.previousSibling.textContent = `${data.hearts} likes`
-    //     })
+    } else if (e.target.textContent === " EW "){
+        console.log(e.target.previousSibling)
+        newLikes = parseInt(e.target.dataset.likes) - 1;
+        e.target.dataset.likes = newLikes;
+        e.target.previousSibling.dataset.likes = newLikes;
+        let newHearts = {hearts: (e.target.dataset.likes)};
+        fetch(`http://localhost:3000/recipes/${e.target.dataset.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newHearts)
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            e.target.previousSibling.previousSibling.textContent = `${data.hearts} likes`
+        })
     }
 }
 
