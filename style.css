@@ -108,8 +108,21 @@ p {
     border-radius: 7px;
     padding: 8px;
     font-weight: bold;
+    margin: 5px;
 }
 .likebutton:hover {
+    box-shadow: 5px 5px 3px rgba(128, 128, 128, 0.493);
+}
+.ewbutton {
+    width: 25%;
+    background-color: aquamarine;
+    border: none;
+    border-radius: 7px;
+    padding: 8px;
+    font-weight: bold;
+    margin: 5px;
+}
+.ewbutton:hover {
     box-shadow: 5px 5px 3px rgba(128, 128, 128, 0.493);
 }
 footer {
